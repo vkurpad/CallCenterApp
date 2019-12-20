@@ -1,0 +1,223 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+textarea.box1 {
+    width: 648px;
+    height: 30px;
+    border: none;
+    background-color: azure;
+    font-size: 14pt;
+    color: blue;
+    padding-left: 5px;
+}
+
+textarea.box2 {
+    width: 648px;
+    height: 100px;
+    border: none;
+    background-color: azure;
+    font-size: 12pt;
+    padding-left: 5px;
+    margin-bottom: 24px;
+}
+
+.sampleTitle {
+    font: 32px/normal 'Segoe UI Light',Arial,Helvetica,Sans-Serif;
+    margin: 20px 0;
+    font-size: 32px;
+    text-align: left;
+}
+
+.sampleText {
+    font: 16px/bold 'Segoe UI Light',Arial,Helvetica,Sans-Serif;
+    margin: 20px 0;
+    font-size: 14px;
+    text-align: left;
+    height: 30px;
+}
+
+.searchBoxForm {
+    width: 648px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 0 rgba(0,0,0,.16);
+    background-color: #fff;
+    display: inline-block;
+    border-collapse: collapse;
+    border-spacing: 0;
+    list-style: none;
+    color: #666;
+}
+
+.searchBox {
+    width: 568px;
+    font-size: 16px;
+    margin: 5px 0 1px 20px;
+    padding: 0 10px 0 0;
+    border: 0;
+    max-height: 30px;
+    outline: none;
+    box-sizing: content-box;
+    height: 35px;
+    vertical-align: top;
+}
+
+.searchBoxSubmit {
+    background-color: #fff;
+    border-color: #fff;
+    background-image: url(/images/search.png);
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    text-indent: -99em;
+    border-width: 0;
+    border-style: solid;
+    margin: 10px;
+    outline: 0;
+}
+
+
+
+
+.masthead {
+    background: #e74c3c;
+    box-shadow: 3px 3px 8px hsl(0, 0%, 70%);
+}
+
+.site-title {
+    margin: 0 0 1em;
+    padding: 1em 0;
+    font-size: 2em;
+    font-weight: 300;
+    text-align: center;
+    color: black;
+}
+
+@media screen and (min-width: 44.44em) {
+    .site-title {
+        font-size: 2em;
+    }
+}
+
+@media screen and (min-width: 50em) {
+    .site-title {
+        font-size: 2.5em;
+    }
+}
+
+.site-title a {
+    color: hsl(5, 45%, 95%);
+    text-decoration: none;
+}
+
+    .site-title a:hover {
+        text-decoration: underline;
+    }
+
+/* Card Based Layout - Base styles */
+body {
+    background: #ecf0f1;
+    line-height: 1.4;
+}
+
+.centered {
+    margin-top: 20px;
+}
+.site-title {
+    color: white;
+}
+
+.card {
+    background: white;
+    margin-bottom: 2em;
+}
+
+    .card a {
+        color: black;
+        text-decoration: none;
+    }
+
+        .card a:hover {
+            box-shadow: 3px 3px 8px hsl(0, 0%, 70%);
+        }
+
+.card-content {
+    padding: 1.4em;
+}
+
+    .card-content h2 {
+        margin-top: 0;
+        margin-bottom: .5em;
+        font-weight: normal;
+    }
+
+    .card-content p {
+        font-size: 95%;
+    }
+
+
+
+/* Flexbox styles */
+@media screen and (min-width: 40em) {
+    .cards {
+        margin-top: -1em;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        margin-bottom: 1em;
+        display: flex;
+        flex: 0 1 calc(50% - 0.5em);
+        /* width: calc(50% - 1em); */
+    }
+}
+/* mq 40em*/
+
+@media screen and (min-width: 60em) {
+    .cards {
+        margin-top: inherit;
+    }
+
+    .card {
+        margin-bottom: 2em;
+        display: flex;
+        flex: 0 1 calc(33% - 0.5em);
+        /* width: calc(33% - 1em); */
+    }
+}
+/* mq 60em*/

@@ -1,0 +1,60 @@
+﻿@model CallCenterApp.Models.SearchData
+@{
+    ViewData["Title"] = "Home Page";
+}
+<head>
+    <link rel="stylesheet" href="~/css/hotels.css" />
+    <script type="text/javascript">
+        $(".audio-button").on('click', function(){
+ $(".stream-icon").toggleClass("ion-ios-play ion-ios-pause")
+});
+    </script>
+</head>
+<body>
+    <h1 class="sampleTitle">
+        <img src="~/images/azure-logo.png" width="80" />
+        Hotels Search
+    </h1>
+
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        // Display the search text box, with the search icon to the right of it.
+        <div class="searchBoxForm">
+            @Html.TextBoxFor(m => m.searchText, new { @class = "searchBox" }) <input class="searchBoxSubmit" type="submit" value="">
+        </div>
+
+        @if (Model != null)
+        {
+            // Show the result count.
+            <p class="sampleText">
+                @Html.DisplayFor(m => m.resultList.Results.Count) Results
+            </p>
+            <div class="centered">
+
+                <section class="cards">
+                    @for (var i = 0; i < Model.resultList.Results.Count; i++)
+                    {
+                        
+                        <article class="card">
+                            <a href="#">
+                                <figure class="thumbnail">
+                                   <i class="fas fa-camera"></i>
+                                </figure>
+                                <div class="card-content">
+                                    <h2>@Model.resultList.Results[i].Document.audio_file</h2>
+                                    <p>@Model.resultList.Results[i].Document.summary.highest_sentiment</p>
+                                </div>
+                                <!-- .card-content -->
+                            </a>
+                        </article>
+                    }
+                </section>
+                <!-- .cards -->
+
+            </div>
+            }
+            }
+
+            
+
+        </body>
