@@ -23,7 +23,7 @@
   },
   "fieldMappings": [
     {
-      "sourceFieldName": "AudioFileUrl",
+      "sourceFieldName": "source",
       "targetFieldName": "audio_file",
       "mappingFunction": {
         "name": "extractTokenAtPosition",
