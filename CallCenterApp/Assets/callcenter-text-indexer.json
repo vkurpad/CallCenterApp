@@ -17,8 +17,7 @@
     "configuration": {
       "imageAction": "none",
       "dataToExtract": "contentAndMetadata",
-      "parsingMode": "jsonArray",
-      "documentRoot": "/AudioFileResults"
+      "parsingMode": "json"
     }
   },
   "fieldMappings": [
