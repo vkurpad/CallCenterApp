@@ -239,7 +239,7 @@
         },
         {
           "name": "offset",
-          "type": "Edm.Double",
+          "type": "Edm.String",
           "searchable": false,
           "filterable": true,
           "retrievable": true,
@@ -253,7 +253,7 @@
         },
         {
           "name": "duration",
-          "type": "Edm.Double",
+          "type": "Edm.String",
           "searchable": false,
           "filterable": true,
           "retrievable": true,

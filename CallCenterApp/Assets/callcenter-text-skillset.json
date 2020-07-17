@@ -6,17 +6,17 @@
       "@odata.type": "#Microsoft.Skills.Util.ConditionalSkill",
       "name": "Filter Customer Utterances",
       "description": null,
-      "context": "/document/SegmentResults/*",
+      "context": "/document/recognizedPhrases/*",
       "inputs": [
         {
           "name": "condition",
-          "source": "= $(/document/SegmentResults/*/ChannelNumber) == '1'",
+          "source": "= $(/document/recognizedPhrases/*/channel) == 1",
           "sourceContext": null,
           "inputs": []
         },
         {
           "name": "whenTrue",
-          "source": "/document/SegmentResults/*/NBest/0/Display",
+          "source": "/document/recognizedPhrases/*/nBest/0/display",
           "sourceContext": null,
           "inputs": []
         },
@@ -38,13 +38,13 @@
       "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
       "name": "KeyPhrase On customer utterance in english",
       "description": null,
-      "context": "/document/SegmentResults/*/customer_utterance",
+      "context": "/document/recognizedPhrases/*/customer_utterance",
       "defaultLanguageCode": "en",
       "maxKeyPhraseCount": null,
       "inputs": [
         {
           "name": "text",
-          "source": "/document/SegmentResults/*/customer_utterance",
+          "source": "/document/recognizedPhrases/*/customer_utterance",
           "sourceContext": null,
           "inputs": []
         }
@@ -60,12 +60,12 @@
       "@odata.type": "#Microsoft.Skills.Text.SentimentSkill",
       "name": "Sentiment On customer utterance in english",
       "description": null,
-      "context": "/document/SegmentResults/*/customer_utterance",
+      "context": "/document/recognizedPhrases/*/customer_utterance",
       "defaultLanguageCode": "en",
       "inputs": [
         {
           "name": "text",
-          "source": "/document/SegmentResults/*/customer_utterance",
+          "source": "/document/recognizedPhrases/*/customer_utterance",
           "sourceContext": null,
           "inputs": []
         }
@@ -81,7 +81,7 @@
       "@odata.type": "#Microsoft.Skills.Text.EntityRecognitionSkill",
       "name": "EntityRecognition On customer utterance in english",
       "description": null,
-      "context": "/document/SegmentResults/*/customer_utterance",
+      "context": "/document/recognizedPhrases/*/customer_utterance",
       "categories": [
         "Person",
         "Location",
@@ -93,7 +93,7 @@
       "inputs": [
         {
           "name": "text",
-          "source": "/document/SegmentResults/*/customer_utterance",
+          "source": "/document/recognizedPhrases/*/customer_utterance",
           "sourceContext": null,
           "inputs": []
         }
@@ -121,73 +121,51 @@
       "@odata.type": "#Microsoft.Skills.Util.ShaperSkill",
       "name": "ComplexType-Conversation",
       "description": "Create the conversation complex type",
-      "context": "/document/SegmentResults/*",
+      "context": "/document/recognizedPhrases/*",
       "inputs": [
         {
           "name": "speaker",
-          "source": "/document/SegmentResults/*/ChannelNumber",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/recognizedPhrases/*/channel"
         },
         {
           "name": "text",
-          "source": "/document/SegmentResults/*/NBest/0/Display",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/recognizedPhrases/*/nBest/0/display"
         },
         {
           "name": "offset",
-          "source": "/document/SegmentResults/*/Offset",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/recognizedPhrases/*/offset"
         },
         {
           "name": "duration",
-          "source": "/document/SegmentResults/*/Duration",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/recognizedPhrases/*/duration"
         },
         {
           "name": "offset_in_seconds",
-          "source": "/document/SegmentResults/*/OffsetInSeconds",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/recognizedPhrases/*/offsetInTicks"
         },
         {
           "name": "duration_in_seconds",
-          "source": "/document/SegmentResults/*/DurationInSeconds",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/recognizedPhrases/*/durationInTicks"
         },
         {
           "name": "sentiment",
-          "source": "/document/SegmentResults/*/customer_utterance/sentiment",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/recognizedPhrases/*/customer_utterance/sentiment"
         },
         {
           "name": "key_phrases",
-          "source": "/document/SegmentResults/*/customer_utterance/key_phrases/*",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/recognizedPhrases/*/customer_utterance/key_phrases/*"
         },
         {
           "name": "people",
-          "source": "/document/SegmentResults/*/customer_utterance/people/*",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/recognizedPhrases/*/customer_utterance/people/*"
         },
         {
           "name": "locations",
-          "source": "/document/SegmentResults/*/customer_utterance/locations/*",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/recognizedPhrases/*/customer_utterance/locations/*"
         },
         {
           "name": "organizations",
-          "source": "/document/SegmentResults/*/customer_utterance/organizations/*",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/recognizedPhrases/*/customer_utterance/organizations/*"
         }
       ],
       "outputs": [
@@ -210,7 +188,7 @@
       "inputs": [
         {
           "name": "conversation",
-          "source": "/document/SegmentResults/*/conversation",
+          "source": "/document/recognizedPhrases/*/conversation",
           "sourceContext": null,
           "inputs": []
         }
@@ -232,69 +210,51 @@
             "name": "Projection Shaper",
             "description": "Create the conversation complex type",
             "context": "/document",
-            "inputs": [
-                {
-                    "name": "AudioLengthInSeconds",
-                    "source": "/document/AudioLengthInSeconds",
-                    "sourceContext": null,
-                    "inputs": []
-                },
-                {
-                    "name": "turns",
-                    "source": "/document/summary/turns",
-                    "sourceContext": null,
-                    "inputs": []
-                },
-                {
-                    "name": "lowestSentiment",
-                    "source": "/document/summary/lowestSentiment",
-                    "sourceContext": null,
-                    "inputs": []
-                },
-                {
-                    "name": "highestSentiment",
-                    "source": "/document/summary/highestSentiment",
-                    "sourceContext": null,
-                    "inputs": []
-                },
-                {
-                    "name": "averageSentiment",
-                    "source": "/document/summary/averageSentiment",
-                    "sourceContext": null,
-                    "inputs": []
-                },
-                {
-                    "name": "maxChangeIndex",
-                    "source": "/document/summary/moment/turn",
-                    "sourceContext": null,
-                    "inputs": []
-                },
-                {
-                    "name": "maxChangeValue",
-                    "source": "/document/summary/moment/sentimentDrop",
-                    "sourceContext": null,
-                    "inputs": []
-                },
-                {
-                    "name": "maxChangeOffset",
-                    "source": "/document/summary/moment/offset",
-                    "sourceContext": null,
-                    "inputs": []
-                },
-                {
-                    "name": "conversation",
-                    "source": "/document/resultConversation",
-                    "sourceContext": null,
-                    "inputs": []
-                }
-            ],
-            "outputs": [
-                {
-                    "name": "output",
-                    "targetName": "tableProjection"
-                }
-            ]
+      "inputs": [
+        {
+          "name": "AudioLengthInSeconds",
+          "source": "/document/resultConversation/audioLengthInSeconds"
         },
+        {
+          "name": "turns",
+          "source": "/document/summary/turns"
+        },
+        {
+          "name": "lowestSentiment",
+          "source": "/document/summary/lowestSentiment"
+        },
+        {
+          "name": "highestSentiment",
+          "source": "/document/summary/highestSentiment"
+        },
+        {
+          "name": "averageSentiment",
+          "source": "/document/summary/averageSentiment"
+        },
+        {
+          "name": "maxChangeIndex",
+          "source": "/document/summary/moment/turn"
+        },
+        {
+          "name": "maxChangeValue",
+          "source": "/document/summary/moment/sentimentDrop"
+        },
+        {
+          "name": "maxChangeOffset",
+          "source": "/document/summary/moment/offset"
+        },
+        {
+          "name": "conversation",
+          "source": "/document/resultConversation"
+        }
+      ],
+      "outputs": [
+          {
+              "name": "output",
+              "targetName": "tableProjection"
+          }
+      ]
+    },
     {
       "@odata.type": "#Microsoft.Skills.Util.ShaperSkill",
       "name": "Shaper index summary",
@@ -303,33 +263,23 @@
       "inputs": [
         {
           "name": "lowest_sentiment",
-          "source": "/document/summary/lowestSentiment",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/summary/lowestSentiment"
         },
         {
           "name": "highest_sentiment",
-          "source": "/document/summary/highestSentiment",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/summary/highestSentiment"
         },
         {
           "name": "max_change_index",
-          "source": "/document/summary/moment/turn",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/summary/moment/turn"
         },
         {
           "name": "max_change",
-          "source": "/document/summary/moment/sentimentDrop",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/summary/moment/sentimentDrop"
         },
         {
           "name": "max_change_time",
-          "source": "/document/summary/moment/offset",
-          "sourceContext": null,
-          "inputs": []
+          "source": "/document/summary/moment/offset"
         }
       ],
       "outputs": [
